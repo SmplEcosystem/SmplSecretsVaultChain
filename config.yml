@@ -12,6 +12,11 @@ client:
 init:
   client:
     keyring-backend: "test"
+    chain-id: "cosmos:smpl-secrets-vault"
+  config:
+    consensus:
+      create_empty_blocks: false
+      create_empty_blocks_interval: "0s"
 genesis:
   chain_id: "cosmos:smpl-secrets-vault"
   app_state:

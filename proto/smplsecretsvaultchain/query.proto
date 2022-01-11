@@ -5,6 +5,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "smplsecretsvaultchain/params.proto";
+import "smplsecretsvaultchain/wallets.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "github.com/SmplEcosystem/SmplSecretsVaultChain/x/smplsecretsvaultchain/types";
@@ -15,7 +16,17 @@ service Query {
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/SmplEcosystem/smplsecretsvaultchain/smplsecretsvaultchain/params";
   }
-  // this line is used by starport scaffolding # 2
+  // Queries a Wallets by index.
+	rpc Wallets(QueryGetWalletsRequest) returns (QueryGetWalletsResponse) {
+		option (google.api.http).get = "/SmplEcosystem/smplsecretsvaultchain/smplsecretsvaultchain/wallets/{owner}";
+	}
+
+	// Queries a list of Wallets items.
+	rpc WalletsAll(QueryAllWalletsRequest) returns (QueryAllWalletsResponse) {
+		option (google.api.http).get = "/SmplEcosystem/smplsecretsvaultchain/smplsecretsvaultchain/wallets";
+	}
+
+// this line is used by starport scaffolding # 2
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -25,6 +36,24 @@ message QueryParamsRequest {}
 message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetWalletsRequest {
+	  string owner = 1;
+
+}
+
+message QueryGetWalletsResponse {
+	Wallets wallets = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllWalletsRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllWalletsResponse {
+	repeated Wallets wallets = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3

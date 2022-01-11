@@ -3,6 +3,7 @@ package SmplEcosystem.smplsecretsvaultchain.smplsecretsvaultchain;
 
 import "gogoproto/gogo.proto";
 import "smplsecretsvaultchain/params.proto";
+import "smplsecretsvaultchain/wallets.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "github.com/SmplEcosystem/SmplSecretsVaultChain/x/smplsecretsvaultchain/types";
@@ -10,5 +11,6 @@ option go_package = "github.com/SmplEcosystem/SmplSecretsVaultChain/x/smplsecret
 // GenesisState defines the smplsecretsvaultchain module's genesis state.
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
+  repeated Wallets walletsList = 2 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }
